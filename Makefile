@@ -1,4 +1,4 @@
-.PHONY: help setup test
+.PHONY: help setup teardown test
 
 export CHROME_EXTENSION_ID ?=
 
@@ -13,6 +13,9 @@ test:
 
 e2e-test:
 	npx --no -- jest --config=jest.config.e2e.js
+
+teardown:
+	rm -rf .env
 
 .env:
 	echo CHROME_EXTENSION_ID=$(CHROME_EXTENSION_ID) >> $@
