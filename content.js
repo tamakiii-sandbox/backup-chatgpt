@@ -13,17 +13,21 @@ const saveConversations = (conversations) => {
   });
 };
 
-const observer = new MutationObserver((mutations) => {
+const observeChatContainer = () => {
+  const observer = new MutationObserver((mutations) => {
+    const chatContainer = document.querySelector('.conversation-container');
+    const conversations = extractConversations(chatContainer);
+    saveConversations(conversations);
+  });
+
+  const config = { childList: true, subtree: true };
+
   const chatContainer = document.querySelector('.conversation-container');
-  const conversations = extractConversations(chatContainer);
-  saveConversations(conversations);
-});
+  if (chatContainer) {
+    observer.observe(chatContainer, config);
+  } else {
+    console.error('Could not find conversation container');
+  }
+};
 
-const config = { childList: true, subtree: true };
-
-const chatContainer = document.querySelector('.conversation-container');
-if (chatContainer) {
-  observer.observe(chatContainer, config);
-} else {
-  console.error('Could not find conversation container');
-}
+export default observeChatContainer;
