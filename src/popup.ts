@@ -1,17 +1,14 @@
-const exportBtn = document.getElementById('exportBtn');
+import { getSavedConversations } from './content';
 
-const downloadData = (data, filename, type) => {
-  const file = new Blob([data], { type });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(file);
-  a.download = filename;
-  a.click();
-};
+document.addEventListener('DOMContentLoaded', () => {
+  const conversationList = document.getElementById('conversation-list');
 
-exportBtn.addEventListener('click', () => {
-  chrome.storage.local.get('conversations', (result) => {
-    const conversations = result.conversations || [];
-    const data = JSON.stringify(conversations, null, 2);
-    downloadData(data, 'openai_chat_backup.json', 'application/json');
-  });
+  if (conversationList) {
+    const conversations = getSavedConversations();
+    conversations.forEach((conversation, index) => {
+      const listItem = document.createElement('div');
+      listItem.textContent = `Conversation ${index + 1}: ${conversation.messages.length} messages`;
+      conversationList.appendChild(listItem);
+    });
+  }
 });
