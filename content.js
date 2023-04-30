@@ -1,5 +1,6 @@
-const extractConversations = () => {
-  const messages = Array.from(document.querySelectorAll('.message'));
+// content.js
+export const extractConversations = (container) => {
+  const messages = Array.from(container.querySelectorAll('.message'));
   return messages.map((message) => ({
     author: message.querySelector('.author').textContent,
     content: message.querySelector('.content').textContent
@@ -12,10 +13,10 @@ const saveConversations = (conversations) => {
   });
 };
 
-
 const observer = new MutationObserver((mutations) => {
-  const conversations = extractConversations();
-	  saveConversations(conversations);
+  const chatContainer = document.querySelector('.conversation-container');
+  const conversations = extractConversations(chatContainer);
+  saveConversations(conversations);
 });
 
 const config = { childList: true, subtree: true };
@@ -26,4 +27,3 @@ if (chatContainer) {
 } else {
   console.error('Could not find conversation container');
 }
-
