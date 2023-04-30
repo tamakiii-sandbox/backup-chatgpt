@@ -20,7 +20,7 @@ describe('OpenAI Chat Backup extension', () => {
 
   test('should save and export conversations', async () => {
     // Load the popup.html file directly from the file system
-    const extensionPath = await fs.realpath(path.join(__dirname, '..'));
+    const extensionPath = await fs.realpath(path.join(__dirname, '../..'));
     const popupURL = `file://${extensionPath}/popup.html`;
     await page.goto(popupURL);
 
