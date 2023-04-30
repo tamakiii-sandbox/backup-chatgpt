@@ -13,12 +13,14 @@
     }
   },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
       "matches": ["*://chat.openai.com/*"],
-      "js": ["content.js"]
+      "js": ["main.js"],
+      "type": "module"
     }
   ],
   "icons": {
