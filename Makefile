@@ -1,4 +1,4 @@
-.PHONY: help setup teardown test
+.PHONY: help setup build clean teardown test
 
 export CHROME_EXTENSION_ID ?=
 
@@ -7,6 +7,9 @@ help:
 
 setup: \
 	.env
+
+build: \
+	dist
 
 test:
 	npx --no -- jest --config=jest.config.unit.js
@@ -17,5 +20,11 @@ e2e-test:
 teardown:
 	rm -rf .env
 
+clean:
+	rm -rf dist
+
 .env:
 	echo CHROME_EXTENSION_ID=$(CHROME_EXTENSION_ID) >> $@
+
+dist:
+	npx --no -- vite build
