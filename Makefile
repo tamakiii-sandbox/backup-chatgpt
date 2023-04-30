@@ -9,7 +9,10 @@ setup: \
 	.env
 
 test:
-	npx --no -- jest
+	npx --no -- jest --config=jest.config.unit.js
+
+e2e-test:
+	npx --no -- jest --config=jest.config.e2e.js
 
 .env:
 	echo CHROME_EXTENSION_ID=$(CHROME_EXTENSION_ID) >> $@
