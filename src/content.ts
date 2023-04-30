@@ -30,4 +30,10 @@ const observeChatContainer = () => {
   }
 };
 
+export function getSavedConversations(): Conversation[] {
+  const savedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return savedData ? JSON.parse(savedData) : [];
+}
+
+
 export default observeChatContainer;
