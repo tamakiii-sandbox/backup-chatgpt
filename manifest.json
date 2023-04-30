@@ -5,7 +5,7 @@
   "description": "Backup your conversations on chat.openai.com",
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "src/popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["*://chat.openai.com/*"],
-      "js": ["main.js"],
+      "js": ["dist/content.js"],
       "type": "module"
     }
   ],
