@@ -1,7 +1,5 @@
 .PHONY: help setup build clean teardown test
 
-export CHROME_EXTENSION_ID ?=
-
 help:
 	@cat $(firstword $(MAKEFILE_LIST))
 
@@ -24,7 +22,7 @@ clean:
 	rm -rf dist
 
 .env:
-	echo CHROME_EXTENSION_ID=$(CHROME_EXTENSION_ID) >> $@
+	touch $@
 
 dist:
 	node build.js
