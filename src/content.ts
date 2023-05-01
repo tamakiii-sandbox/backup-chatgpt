@@ -1,4 +1,7 @@
 // content.js
+
+const LOCAL_STORAGE_KEY = 'backup-chatgpt.saved_conversations';
+
 export const extractConversations = (container) => {
   const messages = Array.from(container.querySelectorAll('.message'));
   return messages.map((message) => ({
