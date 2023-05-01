@@ -25,8 +25,6 @@
     "playwright": "^1.33.0",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.3",
-    "vite-plugin-chrome-extension": "^0.0.7"
+    "typescript": "^5.0.4"
   }
 }
