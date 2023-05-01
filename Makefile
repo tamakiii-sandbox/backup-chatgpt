@@ -11,11 +11,11 @@ setup: \
 build: \
 	dist
 
-test:
-	npx --no -- jest --config=jest.config.unit.js
+test: test/unit/jest.config.js
+	npx --no -- jest --config=$<
 
-e2e-test:
-	npx --no -- jest --config=jest.config.e2e.js
+e2e-test: test/e2e/jest.config.js
+	npx --no -- jest --config=$<
 
 teardown:
 	rm -rf .env

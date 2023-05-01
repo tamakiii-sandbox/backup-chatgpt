@@ -1,4 +1,4 @@
-import { extractConversations } from '../../content';
+import { extractConversations } from '../../src/content';
 
 describe('extractConversations', () => {
   test('should extract conversation data correctly', () => {

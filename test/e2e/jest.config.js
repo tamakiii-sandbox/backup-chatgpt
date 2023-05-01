@@ -3,6 +3,5 @@ module.exports = {
   testEnvironmentOptions: {
     resources: 'usable',
   },
-  setupFiles: ['./jest.setup.js'],
-  testMatch: ['<rootDir>/test/e2e/**/*.test.js'],
+  testMatch: ['<rootDir>/**/*.test.js'],
 };
