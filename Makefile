@@ -27,4 +27,4 @@ clean:
 	echo CHROME_EXTENSION_ID=$(CHROME_EXTENSION_ID) >> $@
 
 dist:
-	npx --no -- vite build
+	node build.js
