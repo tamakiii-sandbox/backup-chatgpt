@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "OpenAI Chat Backup",
-  "version": "1.0",
+  "version": "0.1",
   "description": "Backup your conversations on chat.openai.com",
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
