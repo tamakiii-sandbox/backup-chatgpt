@@ -4,7 +4,6 @@ help:
 	@cat $(firstword $(MAKEFILE_LIST))
 
 build: \
-	dist/main.js \
 	dist/background.js \
 	dist/content.js \
 	dist/popup.js \
@@ -12,13 +11,10 @@ build: \
 	dist/popup.html \
 	dist/asset
 
-dist/main.js: src/main.js src/content.ts
-	npx --no -- esbuild --bundle $< --outfile=$@
-
 dist/background.js: src/background.ts
 	npx --no -- esbuild --bundle $< --outfile=$@
 
-dist/content.js: src/content.ts
+dist/content.js: src/content.ts src/observe.ts
 	npx --no -- esbuild --bundle $< --outfile=$@
 
 dist/popup.js: src/popup.ts

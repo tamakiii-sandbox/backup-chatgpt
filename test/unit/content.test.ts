@@ -1,6 +1,7 @@
-import { extractConversations } from '../../src/content';
+// test/unit/content.test.ts
+import { extractConversationData } from '../../src/observe';
 
-describe('extractConversations', () => {
+describe('extractConversationData', () => {
   test('should extract conversation data correctly', () => {
     document.body.innerHTML = `
       <div class="message">
@@ -19,7 +20,6 @@ describe('extractConversations', () => {
       { author: 'Assistant', content: "I'm fine, thank you!" }
     ];
 
-    expect(extractConversations(container)).toEqual(expectedResult);
+    expect(extractConversationData(container)).toEqual(expectedResult);
   });
 });
-
