@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
   "name": "OpenAI Chat Backup",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "Backup your conversations on chat.openai.com",
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": ["storage", "activeTab", "scripting", "downloads"],
   "action": {
     "default_popup": "src/popup.html",
     "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
+      "16": "dist/asset/icon/icon16.png",
+      "48": "dist/asset/icon/icon48.png",
+      "128": "dist/asset/icon/icon128.png"
     }
   },
   "background": {
@@ -22,10 +22,5 @@
       "js": ["dist/content.js"],
       "type": "module"
     }
-  ],
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  }
+  ]
 }
