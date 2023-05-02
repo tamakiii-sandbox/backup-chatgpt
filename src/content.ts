@@ -1,7 +1,9 @@
 // src/content.ts
-import { observeChatContainer } from './observe';
-import { browser } from 'webextension-polyfill-ts';
+import { observe } from './observe';
+import { Runtime, browser } from 'webextension-polyfill-ts';
 
-browser.runtime.sendMessage({ type: 'contentScriptLoaded' });
+browser.runtime.onMessage.addListener((message: any, sender: Runtime.MessageSender) => {
+  console.log('Observe: ', message, sender);
+});
 
-observeChatContainer();
+observe('.your_chat_container_selector_here');
