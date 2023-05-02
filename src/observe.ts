@@ -12,51 +12,41 @@ interface Message {
   payload?: any;
 }
 
-const getDomElement = async (message: Message) => {
+const getDomElement = async (message: Message): Promise<string> => {
   console.log('Get dom element:', message);
+  return 'response from getDomElement()';
 };
 
 function startObserving(container: HTMLElement) {
-  (window as any).yourContentScriptMarker = true;
-
+  console.log('startObserving');
   const observer = new MutationObserver((mutations) => {
-    console.log('MutationObserver');
-    return 'my-element';
-    // mutations.forEach((mutation) => {
-    //   if (mutation.type === 'childList') {
-    //     const conversationData = extractConversationData(container);
-    //     browser.runtime.sendMessage({ action: "saveConversation", data: conversationData });
-    //   }
-    // });
+    console.log('MutationObserver:', mutations);
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        console.log(container);
+        // browser.runtime.sendMessage({ action: "saveConversation", data: conversationData });
+      }
+    });
+    return 'return value from MutationObserver';
   });
 
   observer.observe(container, { childList: true, subtree: true });
-  // // Handle potential errors when sending messages
-  // browser.runtime.sendMessage({ action: "saveConversation", data: conversationData })
-  //   .then((response) => {
-  //     // Handle the response, if needed
-  //     console.log('observe: handle response');
-  //   })
-  //   .catch((error) => {
-  //     // Handle the error
-  //     console.error('Error when sending message:', error);
-  //   });
+
+  browser.runtime.onMessage.addListener(async (message: any, sender: Runtime.MessageSender): Promise<string|null> => {
+    console.log('Observe: ', message, sender);
+    switch (message.type) {
+      case MessageType.GetDomElement:
+        return await getDomElement(message);
+      default:
+        console.warn('Unknown message type:', message.type);
+    }
+    return null;
+  });
 }
-
-// export function extractConversationData(container: HTMLElement): any {
-//   const messages = container.querySelectorAll('.message');
-//   const conversationData = Array.from(messages).map((message) => {
-//     const author = message.querySelector('.author')?.textContent;
-//     const content = message.querySelector('.content')?.textContent;
-
-//     return { author, content };
-//   });
-
-//   return conversationData;
-// }
 
 export function observe(selector: string) {
   const container = document.querySelector(selector);
+  console.log('contaienr:', container);
   if (container) {
     startObserving(container as HTMLElement);
   }
