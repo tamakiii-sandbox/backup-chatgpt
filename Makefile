@@ -6,8 +6,8 @@ help:
 setup: \
 	.env
 
-build: \
-	dist
+build:
+	$(MAKE) -f build.mk $@
 
 test: test/unit/jest.config.js
 	npx --no -- jest --config=$<
@@ -19,10 +19,7 @@ teardown:
 	rm -rf .env
 
 clean:
-	rm -rf dist
+	$(MAKE) -f build.mk $@
 
 .env:
 	touch $@
-
-dist:
-	node build.js
