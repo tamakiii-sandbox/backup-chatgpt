@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     browser.runtime.sendMessage({ type: "saveChatData" })
       .then((response) => {
         // Handle response if necessary
+        console.log(response);
         console.log('popup: handle response');
       })
       .catch((error) => {
@@ -17,4 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   });
   document.body.appendChild(saveButton);
+
+  browser.runtime.sendMessage({ type: "updateActiveTabId"});
 });

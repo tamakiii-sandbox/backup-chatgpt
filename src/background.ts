@@ -4,14 +4,29 @@ import { convertToMarkdown } from "./utils";
 
 let activeContentScriptTabId: number | null = null;
 
+browser.runtime.onMessage.addListener(async (message) => {
+  console.log('updating activeContentScriptTabId');
+  if (message.type === 'updateActiveTabId') {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    if (tabs.length > 0) {
+      activeContentScriptTabId = tabs[0].id;
+    } else {
+      activeContentScriptTabId = null;
+    }
+  } else if (message.type === 'saveChatData' && activeContentScriptTabId) {
+    browser.tabs.sendMessage(activeContentScriptTabId, message);
+  }
+  return true;
+});
+
 browser.runtime.onMessage.addListener((message, sender) => {
   if (message.type === 'contentScriptLoaded') {
     activeContentScriptTabId = sender.tab?.id || null;
   } else if (message.type === 'saveChatData' && activeContentScriptTabId) {
+    console.log(activeContentScriptTabId, message);
     browser.tabs.sendMessage(activeContentScriptTabId, message);
   }
 });
-
 
 browser.runtime.onMessage.addListener((request, sender) => {
   if (request.action === "saveConversation") {
