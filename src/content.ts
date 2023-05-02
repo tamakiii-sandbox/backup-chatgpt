@@ -8,9 +8,12 @@ export const extractConversations = (container: HTMLElement) => {
   }));
 };
 
+export const getSavedConversations = (): Array<any> => {
+  return [];
+};
 
 const observeChatContainer = () => {
-  //
+  // TODO: implement
 };
 
 export default observeChatContainer;
