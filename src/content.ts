@@ -1,4 +1,4 @@
 // src/content.ts
-import observeChatContainer from './observe';
+import { observeChatContainer } from './observe';
 
 observeChatContainer();

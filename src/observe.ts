@@ -3,19 +3,24 @@ import { browser } from "webextension-polyfill-ts";
 
 const chatContainerSelector = '.your_chat_container_selector_here'; // Replace with the correct selector for the chat container
 
-const observer = new MutationObserver((mutations) => {
-  mutations.forEach((mutation) => {
-    if (mutation.type === 'childList' && chatContainer) {
-      const conversationData = extractConversationData(chatContainer as HTMLElement);
-      browser.runtime.sendMessage({ action: "saveConversation", data: conversationData });
-    }
+function startObserving(container: HTMLElement) {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        const conversationData = extractConversationData(container);
+        browser.runtime.sendMessage({ action: "saveConversation", data: conversationData });
+      }
+    });
   });
-});
 
-const chatContainer = document.querySelector(chatContainerSelector);
+  observer.observe(container, { childList: true, subtree: true });
+}
 
-if (chatContainer) {
-  observer.observe(chatContainer, { childList: true, subtree: true });
+export function observeChatContainer() {
+  const chatContainer = document.querySelector(chatContainerSelector);
+  if (chatContainer) {
+    startObserving(chatContainer as HTMLElement);
+  }
 }
 
 export function extractConversationData(container: HTMLElement): any {
