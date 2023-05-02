@@ -12,6 +12,7 @@ run:
 		--watch-file='dist/**/*' \
 		--target=chromium \
 		--browser-console \
+		--devtools \
 		--chromium-profile=web-ext.backup-chatgpt \
 		--profile-create-if-missing \
 		--start-url=https://chat.openai.com/
