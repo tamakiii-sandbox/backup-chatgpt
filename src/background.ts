@@ -1,8 +1,8 @@
 // src/background.ts
-import { runtime } from "webextension-polyfill-ts";
+import { browser } from "webextension-polyfill-ts";
 import { convertToMarkdown } from "./utils";
 
-runtime.onMessage.addListener((request, sender) => {
+browser.runtime.onMessage.addListener((request, sender) => {
   if (request.action === "saveConversation") {
     const data = request.data;
     saveAsMarkdown(data);
