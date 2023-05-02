@@ -3,7 +3,7 @@
   "name": "OpenAI Chat Backup",
   "version": "0.1.0",
   "description": "Backup your conversations on chat.openai.com",
-  "permissions": ["storage", "activeTab", "scripting", "downloads", "tabs"],
+  "permissions": ["storage", "activeTab"],
   "action": {
     "default_popup": "dist/popup.html",
     "default_icon": {
