@@ -9,7 +9,8 @@ build: \
 	dist/content.js \
 	dist/popup.js \
 	dist/popup.css \
-	dist/popup.html
+	dist/popup.html \
+	dist/asset
 
 dist/main.js: src/main.js src/content.ts
 	npx --no -- esbuild --bundle $< --outfile=$@
@@ -28,6 +29,9 @@ dist/popup.css: src/popup.css
 
 dist/popup.html: src/popup.html
 	cp $< $@
+
+dist/asset: src/asset
+	cp -r $< $@
 
 clean:
 	rm -rf dist
