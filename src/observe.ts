@@ -14,6 +14,16 @@ function startObserving(container: HTMLElement) {
   });
 
   observer.observe(container, { childList: true, subtree: true });
+  // Handle potential errors when sending messages
+  browser.runtime.sendMessage({ action: "saveConversation", data: conversationData })
+    .then((response) => {
+      // Handle the response, if needed
+      console.log('observe: handle response');
+    })
+    .catch((error) => {
+      // Handle the error
+      console.error('Error when sending message:', error);
+    });
 }
 
 export function observeChatContainer() {
